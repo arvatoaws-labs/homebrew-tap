@@ -5,8 +5,26 @@ class SfnNg < Formula
   sha256 "80ef53862bb3953e4ca647c2cff39ae7f0b2f9ed7e88397cea3d67cb9022df7d"
   license "GPL-3.0"
 
+  # livecheck do
+  #   url :stable
+  #   strategy :github_latest
+  # end
+
+  # bottle do
+  #   sha256 cellar: :any, arm64_big_sur: "e0147ba489a8d96e33fc8be7e2172c632075d5d31a4f6267c3606e463280e0e3"
+  #   sha256 cellar: :any, big_sur:       "0ca7397f9a0ccef6cbb8ff0fd8fb18c6fe86219abaef350e3d7ef248d07440fd"
+  #   sha256 cellar: :any, catalina:      "60460d422253113af3ed60332104f309638942821c655332211a6bc2213c472c"
+  #   sha256 cellar: :any, mojave:        "de4b18789f5d9bc4aaa4d906501200ae4ece7a1971dd1b86e2b2d0a2c8e0d764"
+  #   sha256 cellar: :any, high_sierra:   "cfea5335bf4eccfb7cd1d93bec234d96bd49dce8d593ea966687f777909ba291"
+  # end
+
+  depends_on "rust" => :build
+
   def install
-    bin.install "sfn-ng"
+    system "cargo", "install", *std_cargo_args
+
+    # out_dir = Dir["target/release/build/sfn-ng-*/out"].first
+    # zsh_completion.install "complete/_sfn-ng"
   end
 
   test do
