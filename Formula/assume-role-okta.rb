@@ -10,14 +10,14 @@ class AssumeRole < Formula
   depends_on "awscli"
   depends_on "gimme-aws-creds"
   depends_on "jq"
-  depends_on "zsh" => :optional
+  depends_on "zsh"
 
   def install
-    libexec.install "assume-role"
-    bin.install_symlink libexec/"assume-role"
+    libexec.install "assume-role-okta"
+    bin.install_symlink libexec/"assume-role-okta"
 
     # install autocompletion
-    zsh_completion.install "_assume-role"
+    zsh_completion.install "_assume-role-okta"
 
     # TODO: create a bash completer file
     # bash_completion.install "aws_assume_role_completer"
@@ -31,7 +31,7 @@ class AssumeRole < Formula
   def caveats
     <<~EOS
       Add the following line to your ~/.bashrc or ~/.zshrc:
-        source $(which assume-role)
+        source $(which assume-role-okta)
 
       To add profile autocomplete for Bash add:
 
@@ -50,6 +50,6 @@ class AssumeRole < Formula
   # end
 
   test do
-    assert_match "help", shell_output("#{bin}/assume-role -h")
+    assert_match "help", shell_output("#{bin}/assume-role-okta -h")
   end
 end
