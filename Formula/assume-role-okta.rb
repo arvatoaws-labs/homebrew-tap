@@ -1,4 +1,4 @@
-class AssumeRole < Formula
+class AssumeRoleOkta < Formula
   desc 'Arvato "assume-role" adoption including OKTA integration'
   homepage "https://github.com/arvatoaws-labs/assume-role" # FIXME: add url to release
   # sha256 "" //TODO: add hash when adding url to release
