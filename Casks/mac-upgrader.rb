@@ -3,7 +3,8 @@ cask "mac-upgrader" do
   sha256 "a96b576350cb19d033a4ab63c5a5284e2869f625a079915806b41e1a68c1630e"
 
   url "https://github.com/arvatoaws/cloud-staff-tools/releases/download/mac-upgrader-v#{version}/MacUpgrader-#{version}.zip",
-      verified: "github.com/arvatoaws/cloud-staff-tools/"
+      verified: "github.com/arvatoaws/cloud-staff-tools/",
+      using: :github_private_release
   name "Mac Upgrader"
   desc "Runs all your system and package-manager upgrades in sequence"
   homepage "https://github.com/arvatoaws/cloud-staff-tools/tree/main/mac-upgrader"
