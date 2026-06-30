@@ -5,8 +5,6 @@ class AssumeRoleOkta < Formula
   license "Apache-2.0"
   head "https://github.com/arvatoaws-labs/assume-role.git"
 
- # bottle :unneeded
-
   depends_on "awscli"
   depends_on "gimme-aws-creds"
   depends_on "jq"
