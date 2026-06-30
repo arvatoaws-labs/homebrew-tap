@@ -4,7 +4,7 @@ cask "mac-upgrader" do
 
   url "https://github.com/arvatoaws/cloud-staff-tools/releases/download/mac-upgrader-v#{version}/MacUpgrader-#{version}.zip",
       verified: "github.com/arvatoaws/cloud-staff-tools/",
-      using: :github_private_release
+      using: GitHubPrivateReleaseDownloadStrategy
   name "Mac Upgrader"
   desc "Runs all your system and package-manager upgrades in sequence"
   homepage "https://github.com/arvatoaws/cloud-staff-tools/tree/main/mac-upgrader"
