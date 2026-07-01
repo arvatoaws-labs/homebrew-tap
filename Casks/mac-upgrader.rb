@@ -48,8 +48,8 @@ class GitHubPrivateReleaseDownloadStrategy < CurlDownloadStrategy
 end
 
 cask "mac-upgrader" do
-  version "1.0.1"
-  sha256 "c4bd879faaefe62e94eb135dfad063d4d32f85e06f38841ba43434e5fa9f7787"
+  version "1.0.2"
+  sha256 "f04e2cf84df527501698ea8a1f0c10e10b4dcb2f631656bc46acbf787ed2ffbc"
 
   # The release lives in a PRIVATE repository, so the download is resolved and
   # fetched through the GitHub API by the strategy above. Set
