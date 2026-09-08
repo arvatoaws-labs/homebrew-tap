@@ -56,8 +56,7 @@ cask "mac-upgrader" do
   # HOMEBREW_GITHUB_API_TOKEN to a token with read access to
   # arvatoaws/cloud-staff-tools before running `brew install`.
   url "https://github.com/arvatoaws/cloud-staff-tools/releases/download/mac-upgrader-v#{version}/MacUpgrader-#{version}.dmg",
-      using:    GitHubPrivateReleaseDownloadStrategy,
-      verified: "github.com/arvatoaws/cloud-staff-tools/"
+      using:    GitHubPrivateReleaseDownloadStrategy
   name "Mac Upgrader"
   desc "Runs all your system and package-manager upgrades in sequence"
   homepage "https://github.com/arvatoaws/cloud-staff-tools/tree/main/mac-upgrader"
