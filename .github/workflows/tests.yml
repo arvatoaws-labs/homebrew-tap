@@ -19,8 +19,10 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ steps.set-up-homebrew.outputs.gems-path }}
-          key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
-          restore-keys: ${{ runner.os }}-rubygems-
+          # Include runner.arch: native gem extensions (e.g. json's parser.so) are
+          # arch-specific, so arm64 and x86_64 Linux runners must not share a cache.
+          key: ${{ runner.os }}-${{ runner.arch }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+          restore-keys: ${{ runner.os }}-${{ runner.arch }}-rubygems-
 
       - name: Install Homebrew Bundler RubyGems
         if: steps.cache.outputs.cache-hit != 'true'
