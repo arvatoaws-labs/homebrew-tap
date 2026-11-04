@@ -16,7 +16,7 @@ jobs:
 
       - name: Cache Homebrew Bundler RubyGems
         id: cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ${{ steps.set-up-homebrew.outputs.gems-path }}
           # Include runner.arch: native gem extensions (e.g. json's parser.so) are
@@ -24,8 +24,35 @@ jobs:
           key: ${{ runner.os }}-${{ runner.arch }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
           restore-keys: ${{ runner.os }}-${{ runner.arch }}-rubygems-
 
+      - name: Self-heal broken Homebrew vendor bundle
+        id: self-heal
+        run: |
+          set -euo pipefail
+          if ! command -v brew >/dev/null 2>&1; then
+            echo "::error::brew executable not found on PATH"
+            exit 1
+          fi
+          if brew --version >/dev/null 2>&1; then
+            echo "Homebrew is healthy"
+            echo "repaired=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "::warning::Homebrew is broken on this runner; attempting self-heal"
+          prefix="$(dirname "$(dirname "$(readlink -f "$(command -v brew)")")")"
+          echo "Homebrew prefix: $prefix"
+          rm -rf "$prefix/Library/Homebrew/vendor/bundle/ruby/"*/gems/json-*
+          if brew --version >/dev/null 2>&1; then
+            echo "Surgical repair succeeded (removed broken json gem)"
+            echo "repaired=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "::warning::Surgical repair failed; removing entire vendor bundle"
+          rm -rf "$prefix/Library/Homebrew/vendor/bundle"
+          brew --version
+          echo "repaired=true" >> "$GITHUB_OUTPUT"
+
       - name: Install Homebrew Bundler RubyGems
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true' || steps.self-heal.outputs.repaired == 'true'
         run: brew install-bundler-gems
 
       - run: brew test-bot --only-cleanup-before
