@@ -16,7 +16,7 @@ jobs:
 
       - name: Cache Homebrew Bundler RubyGems
         id: cache
-        uses: actions/cache@v6
+        uses: actions/cache@v6.1.0
         with:
           path: ${{ steps.set-up-homebrew.outputs.gems-path }}
           # Include runner.arch: native gem extensions (e.g. json's parser.so) are
