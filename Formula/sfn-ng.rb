@@ -1,8 +1,8 @@
 class SfnNg < Formula
   desc "Arvato SFN-NG"
   homepage "https://github.com/arvatoaws-labs/sfn-ng"
-  url "https://github.com/arvatoaws-labs/sfn-ng/archive/refs/tags/v0.3.5.tar.gz"
-  sha256 "ab179eb0805ff0174be74825553d93e0bea126dea896a79d28d143bda256299f"
+  url "https://github.com/arvatoaws-labs/sfn-ng/archive/refs/tags/v0.3.6.tar.gz"
+  sha256 "0d6f23634f22518c08555dcc9ed59a5eeda58434328d008c52d6ac2923816cac"
   license "GPL-3.0"
 
   # livecheck do
